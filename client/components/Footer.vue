@@ -19,15 +19,11 @@
 		</v-row>
 	</v-footer>
 </template>
-<script>
-export default {
-	data: () => ({
-		links: [
+<script setup lang="ts">
+const links = [
 			{ name: 'Home', url: '/' },
 			{ name: 'Launches', url: '/launches' },
 			{ name: 'Rockets', url: '/rockets' },
-			{ name: 'Favorites', url: '/favorites' },
-		],
-	}),
-}
+			{ name: 'Favorites', url: '/favorites' }
+		]
 </script>

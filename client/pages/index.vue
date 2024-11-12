@@ -1,100 +1,96 @@
 <template>
 	<v-container>
-		<div class="container">
-			<div class="content-wrapper">
-				<h1 class="title">
-					<span>SpaceX</span>
-				</h1>
-				<v-card class="text-wrapper">
-					<p class="text">
-						Welcome to SpaceX, your gateway to the stars. Explore our impressive catalog of
-						launches and rockets as we continue to push the boundaries of space exploration.
-						Witness the culmination of cutting-edge technology and pioneering spirit as we soar
-						towards the future. Join us as we embark on the next chapter of humanity's journey
-						into space. Welcome to the adventure!
-					</p>
-				</v-card>
-			</div>
-		</div>
+		<h3 class="my-5">
+			Example Vuetify
+			<v-chip color="blue">Card</v-chip>
+		</h3>
+		<v-card class="mx-auto my-12" max-width="374">
+			<template #progress>
+				<v-progress-linear color="deep-purple" height="10" indeterminate />
+			</template>
+
+			<v-img height="250" src="https://cdn.vuetifyjs.com/images/cards/cooking.png" />
+
+			<v-card-title>Cafe Badilico</v-card-title>
+
+			<v-card-text>
+				<v-row align="center" class="mx-0">
+					<ClientOnly>
+						<v-rating :value="4.5" color="amber" dense half-increments readonly size="14" />
+						<div class="grey--text ms-4">4.5 (413)</div>
+					</ClientOnly>
+				</v-row>
+
+				<div class="my-4 text-subtitle-1">$ • Italian, Cafe</div>
+
+				<div>
+					Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio
+					seating.
+				</div>
+			</v-card-text>
+
+			<v-divider class="mx-4" />
+
+			<v-card-title>Tonight's availability</v-card-title>
+
+			<v-card-text>
+				<v-chip-group v-model="selection" active-class="deep-purple accent-4 white--text" column>
+					<v-chip>5:30PM</v-chip>
+
+					<v-chip>7:30PM</v-chip>
+
+					<v-chip>8:00PM</v-chip>
+
+					<v-chip>9:00PM</v-chip>
+				</v-chip-group>
+			</v-card-text>
+
+			<v-card-actions>
+				<v-btn color="deep-purple lighten-2">Reserve</v-btn>
+			</v-card-actions>
+		</v-card>
+		<h3 class="my-5">
+			Example Vuetify
+			<v-chip color="blue">SimpleTable</v-chip>
+			<v-chip color="orange">Data from spaceX graphql</v-chip>
+		</h3>
+		<p>There are {{ ships?.length || 0 }} ships.</p>
+		<v-table>
+			<thead>
+				<tr>
+					<th class="text-left">Name</th>
+					<th class="text-left">Active</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="ship in ships" :key="ship.name">
+					<td>{{ ship.name }}</td>
+					<td>
+						<v-chip :color="ship.active ? 'green' : 'red'">{{ ship.active }}</v-chip>
+					</td>
+				</tr>
+			</tbody>
+		</v-table>
 	</v-container>
 </template>
-
-<script setup lang="ts">
-useHead({
-	title: 'NuxtVGP - SpaceX',
-	meta: [{ name: 'SpaceX', content: 'SpaceX Webpage.' }],
-})
+<script lang="ts" setup>
+const store = useCounter()
+const selection = ref(0)
+const query = gql`
+	query getShips {
+		ships {
+			id
+			name
+			active
+		}
+	}
+`
+const { data } = useAsyncQuery<{
+	ships: {
+		id: string
+		name: string
+		active: boolean
+	}[]
+}>(query)
+const ships = computed(() => data.value?.ships ?? [])
 </script>
-
-<style>
-* {
-	font-family: Poppins, Montserrat, Arial, Helvetica, sans-serif;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 90vh;
-	padding: 20px;
-	background: #f5f5f5;
-}
-
-.content-wrapper {
-	text-align: center;
-	width: 80%;
-}
-
-.title {
-	margin-bottom: 20px;
-	font-size: 3rem;
-	font-weight: 800;
-	color: #1e1e1e;
-}
-
-.icon {
-	font-size: 2.5rem;
-	color: #0058a3;
-	margin-bottom: 10px;
-}
-
-.text-wrapper {
-	margin: 20px auto;
-	padding: 25px;
-	width: 70%;
-	background: #fff;
-	box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
-	border-radius: 8px;
-}
-
-.text {
-	padding: 15px;
-	text-align: justify;
-	font-size: 1.1rem;
-	line-height: 1.6;
-	color: #444;
-}
-
-@media screen and (width <= 800px) {
-	.title {
-		font-size: 2.2rem;
-	}
-
-	.icon {
-		font-size: 2rem;
-	}
-
-	.text-wrapper {
-		width: 85%;
-		padding: 15px;
-	}
-
-	.text {
-		font-size: 1rem;
-		line-height: 1.5;
-	}
-}
-</style>
