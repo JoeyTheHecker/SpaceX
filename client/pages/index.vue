@@ -7,7 +7,11 @@
 				</h1>
 				<v-card class="text-wrapper">
 					<p class="text">
-						Welcome to SpaceX, your gateway to the stars. Explore our impressive catalog of launches and rockets as we continue to push the boundaries of space exploration. Witness the culmination of cutting-edge technology and pioneering spirit as we soar towards the future. Join us as we embark on the next chapter of humanity's journey into space. Welcome to the adventure!
+						Welcome to SpaceX, your gateway to the stars. Explore our impressive catalog of
+						launches and rockets as we continue to push the boundaries of space exploration.
+						Witness the culmination of cutting-edge technology and pioneering spirit as we soar
+						towards the future. Join us as we embark on the next chapter of humanity's journey
+						into space. Welcome to the adventure!
 					</p>
 				</v-card>
 			</div>
@@ -62,7 +66,7 @@ useHead({
 	padding: 25px;
 	width: 70%;
 	background: #fff;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
 	border-radius: 8px;
 }
 
@@ -74,7 +78,7 @@ useHead({
 	color: #444;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (width <= 800px) {
 	.title {
 		font-size: 2.2rem;
 	}

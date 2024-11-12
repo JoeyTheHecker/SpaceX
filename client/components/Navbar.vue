@@ -3,9 +3,7 @@
 		<template #prepend />
 		<v-app-bar-title>
 			<h2>
-				<nuxt-link style="color: black" to="/">
-					SpaceX
-				</nuxt-link>
+				<nuxt-link style="color: black" to="/">SpaceX</nuxt-link>
 			</h2>
 		</v-app-bar-title>
 		<div class="pc-links">
@@ -39,7 +37,6 @@
 			<v-btn class="nav-button" variant="text" to="/favorites">
 				<v-icon icon="mdi-star" class="icon" />
 			</v-btn>
-
 		</div>
 	</v-app-bar>
 </template>
@@ -59,7 +56,7 @@ h5 {
 	margin-right: 20px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (width <= 800px) {
 	h5 {
 		display: none;
 	}
