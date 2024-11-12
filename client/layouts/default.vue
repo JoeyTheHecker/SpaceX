@@ -7,8 +7,5 @@
 		<Footer />
 	</v-app>
 </template>
-<script>
-export default {
-	name: 'DefaultLayout',
-}
+<script setup lang="ts">
 </script>
